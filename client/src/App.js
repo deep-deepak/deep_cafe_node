@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import './App.css';
 import Todo from './containers/Todo';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,11 +14,14 @@ import Gallery from './containers/Gallery';
 import ContactUs from './containers/ContactUs';
 import PageNotFound from './containers/PageNotFound';
 import UserRegister from './containers/UserRegistration';
-import {ToastContainer} from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Profile from './containers/Profile';
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className="App">
       <BrowserRouter>

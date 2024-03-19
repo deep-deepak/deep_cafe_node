@@ -15,7 +15,7 @@ router.get('/api/user/:id', (req, res) => {
     try {
 
         const userId = req.params.id;
-        console.log("userId",userId)
+        console.log("userId", userId)
 
         // Find the item by ID
         const userData = User.find((user) => user._id === userId);
@@ -30,9 +30,9 @@ router.get('/api/user/:id', (req, res) => {
     }
 });
 
-router.post('/api/users/register', async (req, res) => {
+router.post('/api/user/register', async (req, res) => {
     try {
-        const { formData } = req.body;
+        const formData = req.body;
         const userModal = await User.findOne({ email: formData.email });
         if (userModal) {
             return res.send({
@@ -51,7 +51,7 @@ router.post('/api/users/register', async (req, res) => {
             await users.save();
             res.send({
                 status: true,
-                result: users
+                data: users
             })
             res.json(users);
         }
@@ -61,9 +61,9 @@ router.post('/api/users/register', async (req, res) => {
 });
 
 
-router.post('/api/users/login', async (req, res) => {
+router.post('/api/user/login', async (req, res) => {
     try {
-        const { formData } = req.body;
+        const formData = req.body;
         const userModal = await User.findOne({ email: formData.email });
         if (!userModal) {
             return res.send({ message: 'User Not Exist' });

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, TextField, Typography } from "@mui/material"
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import { loginUser } from '../service/user';
 
 export default function Login() {
 
@@ -12,29 +12,36 @@ export default function Login() {
   const navigate = useNavigate()
 
   const hndleSubmitData = async () => {
-     try {
-            if (!email) {
-                toast.error("Email is required!")
-                return;
-            }
-            if (!password) {
-                toast.error("Password is required!")
-                return;
-            }
-            const result = await axios.post('http://localhost:5000/api/users/login', { formData: {email:email,password:password} });
-            if (result) {
-              const userData = result.data.data || {};
-                if (result.data.status === true) {
-                  localStorage.setItem("loginuser",JSON.stringify(userData))
-                  navigate('/profile')
-                } else {
-                    toast.error(result.data.message || "Something went wrong")
-                }
-            }
-        } catch (error) {
-            toast.error(error || "Something went wrong")
+    try {
+      if (!email) {
+        toast.error("Email is required!")
+        return;
+      }
+      if (!password) {
+        toast.error("Password is required!")
+        return;
+      }
+      const result = await loginUser({ email, password });
+      if (result) {
+        if (result.status) {
+          toast.success("Login successfully!");
+          const token = tokenGenerate(result.data);
+          if (token) {
+            localStorage.setItem("token", token);
+            return
+          }
         }
+        toast.error(result.message)
+      }
+    } catch (error) {
+      toast.error(error || "Something went wrong")
+    }
   }
+
+
+  const tokenGenerate = (payload) => {
+    return btoa(JSON.stringify(payload)); // Simulated JWT encoding
+  };
 
   return (
     <section>

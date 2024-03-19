@@ -13,9 +13,10 @@ import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 function Header() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [loginUser, setLoginUser] = useState({})
+  const [loginUser, setLoginUser] = useState({});
   const open = Boolean(anchorEl);
-  
+  const [authenticated, setAuthenticated] = useState(false)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -25,12 +26,21 @@ function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userLogin = localStorage.getItem("loginuser")
-    setLoginUser(JSON.parse(userLogin));
-  })
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userLogin = jwt_decode(token)
+      setLoginUser(userLogin);
+      setAuthenticated(true);
+    }
+  }, [authenticated])
+
+  const jwt_decode = (token) => {
+    return JSON.parse(atob(token)); // Simulated JWT decoding
+  };
 
   const handleLogout = () => {
-    localStorage.removeItem("loginuser");
+    localStorage.removeItem("token");
+    setAuthenticated(false);
     navigate("/")
   }
 
@@ -42,13 +52,13 @@ function Header() {
           <img src="images/deepcafe.png" height="150px" style={{ marginTop: "-20px" }} alt="" />
         </Link>
         <ul>
-          <li className=""> <Link to="/">Home</Link></li>
-          <li> <Link to="/about">About</Link></li>
-          <li className=""> <Link to="/menu">Menu</Link> </li>
-          <li className=""> <Link to="/services">Services</Link></li>
-          <li className=""> <Link to="/gallery">Gallery </Link></li>
-          <li className=""> <Link to="/contactus">Contact Us</Link></li>
-          {loginUser ? (
+          <li className={window.location.pathname === "/" ? "active" : ""}> <Link to="/">Home</Link></li>
+          <li className={window.location.pathname === "/about" ? "active" : ""}> <Link to="/about">About</Link></li>
+          <li className={window.location.pathname === "/menu" ? "active" : ""}> <Link to="/menu">Menu</Link> </li>
+          <li className={window.location.pathname === "/services" ? "active" : ""}> <Link to="/services">Services</Link></li>
+          <li className={window.location.pathname === "/gallery" ? "active" : ""}> <Link to="/gallery">Gallery </Link></li>
+          <li className={window.location.pathname === "/contactus" ? "active" : ""}> <Link to="/contactus">Contact Us</Link></li>
+          {authenticated && loginUser ? (
             <li className="">
               <Tooltip title="Account">
                 <IconButton

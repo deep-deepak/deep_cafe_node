@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Typography } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { signupUser } from '../service/user';
 
 function UserRegister() {
 
@@ -54,13 +54,14 @@ function UserRegister() {
                 toast.error("password don't match");
                 return;
             }
-            const result = await axios.post('http://localhost:5000/api/users/register', { formData: formData });
+            const result = await signupUser(formData);
             if (result) {
-                if (result.data.status === true) {
-                    toast.success("regitser successfull")
-                } else {
-                    toast.error(result.data.message || "Something went wrong")
+                if (result.status) {
+                    toast.success("User register successfully!");
+                    navigate("/login")
+                    return;
                 }
+                toast.error(result.message)
             }
         } catch (error) {
             toast.error(error || "Something went wrong")
