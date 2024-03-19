@@ -29,9 +29,9 @@
 }
 
 td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-sizeMedium.edit_delete.css-1ex1afd-MuiTableCell-root {
-    display: flex;
-    justify-content: space-between;
-    width: 100px;
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
 }
 
 .card {
@@ -91,6 +91,7 @@ button:hover {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -316,7 +317,7 @@ h5.card-title {
 
 @keyframes gradientAnim {
   to {
-      background-position: 100% top;
+    background-position: 100% top;
   }
 }
 
@@ -344,7 +345,8 @@ h6.price {
 .image {
   margin-bottom: 15px !important;
 }
-.image:hover{
+
+.image:hover {
   border: 3px solid #ff5200;
   border-radius: 10px;
 }
@@ -931,6 +933,7 @@ section.servicediv {
 .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.css-md26zr-MuiInputBase-root-MuiOutlinedInput-root {
   margin-bottom: 10px;
 }
+
 .event-price {
   font-size: 30px;
   font-family: "Playfair Display", serif;
@@ -1034,20 +1037,20 @@ section.contactus {
 
 @media only screen and (max-width: 800px) {
   .container {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .image {
-      width: 100%;
+    width: 100%;
   }
 
   .image:hover {
-      width: 100%;
-      /*overwrite hover*/
+    width: 100%;
+    /*overwrite hover*/
   }
 
   .image:active {
-      background-size: 150%;
+    background-size: 150%;
   }
 }
 
@@ -1055,76 +1058,76 @@ section.contactus {
 
 @media only screen and (max-width: 1200px) {
   .navbar ul {
-      display: block;
+    display: block;
   }
 
   .service {
-      height: 330px;
-      width: 200px;
-      margin-bottom: 10px;
-      padding: 30px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      position: relative;
-      top: 0;
-      -webkit-transition: .3s all ease;
-      -o-transition: .3s all ease;
-      transition: .3s all ease;
+    height: 330px;
+    width: 200px;
+    margin-bottom: 10px;
+    padding: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 0;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
   }
 
   .service:hover {
-      background-color: #ff5e14;
-      color: white;
-      transform: translateY(-10px);
+    background-color: #ff5e14;
+    color: white;
+    transform: translateY(-10px);
   }
 }
 
 @media only screen and (max-width: 600px) {
   .navbar ul {
-      display: block;
+    display: block;
   }
 
   .service {
-      height: 330px;
-      width: 200px;
-      margin-bottom: 10px;
-      padding: 30px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      position: relative;
-      top: 0;
-      -webkit-transition: .3s all ease;
-      -o-transition: .3s all ease;
-      transition: .3s all ease;
+    height: 330px;
+    width: 200px;
+    margin-bottom: 10px;
+    padding: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 0;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
   }
 
   .service:hover {
-      background-color: #ff5e14;
-      color: white;
-      transform: translateY(-10px);
+    background-color: #ff5e14;
+    color: white;
+    transform: translateY(-10px);
   }
 }
 
 @media only screen and (max-width: 425px) {
   .navbar ul {
-      display: block;
+    display: block;
   }
 
   .service {
-      height: 330px;
-      width: 200px;
-      margin-bottom: 10px;
-      padding: 30px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      position: relative;
-      top: 0;
-      -webkit-transition: .3s all ease;
-      -o-transition: .3s all ease;
-      transition: .3s all ease;
+    height: 330px;
+    width: 200px;
+    margin-bottom: 10px;
+    padding: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 0;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
   }
 
   .service:hover {
-      background-color: #ff5e14;
-      color: white;
-      transform: translateY(-10px);
+    background-color: #ff5e14;
+    color: white;
+    transform: translateY(-10px);
   }
 }
 
@@ -1160,6 +1163,7 @@ section.contactus {
   margin: 20px 0;
   display: inline-block;
 }
+
 .contant_box_404 {
   margin-top: -50px;
 }
@@ -1222,7 +1226,8 @@ section.contactus {
   padding-top: 10px;
 }
 
-.url, hr {
+.url,
+hr {
   text-align: center;
 }
 
@@ -1240,7 +1245,8 @@ section.contactus {
   text-decoration: none;
 }
 
-.url a:hover, .url .active {
+.url a:hover,
+.url .active {
   background-color: #e8f5ff;
   border-radius: 28px;
   color: #000;
@@ -1324,11 +1330,52 @@ section.contactus {
 .fa-snapchat:hover {
   color: #fffb01 !important;
 }
-.profile_page{
+
+.profile_page {
   background-color: #e8f5ff;
   font-family: Arial;
   overflow: hidden;
 }
+
 /* profile page */
 
+/* dashboard */
 
+.MuiListItemText-root.active_nav.css-tlelie-MuiListItemText-root {
+  cursor: pointer;
+  background: #ff5e14;
+  text-align: center;
+  height: 40px;
+  /* width: 40px !important; */
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+}
+
+.MuiListItemText-root.nav_item.css-tlelie-MuiListItemText-root {
+  cursor: pointer;
+  background: black;
+  text-align: center;
+  height: 40px;
+  /* width: 40px !important; */
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+}
+
+.MuiListItemText-root.nav_item.css-tlelie-MuiListItemText-root:hover {
+  cursor: pointer;
+  background: #ff5e14;
+  text-align: center;
+  height: 40px;
+  /* width: 40px !important; */
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+}
+
+nav.MuiList-root.MuiList-padding.css-h4y409-MuiList-root {
+  background: #1f2431;
+  height: 100vh;
+  width: 250px;
+}

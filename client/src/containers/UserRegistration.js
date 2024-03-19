@@ -58,6 +58,7 @@ function UserRegister() {
             if (result) {
                 if (result.status) {
                     toast.success("User register successfully!");
+                    clearField()
                     navigate("/login")
                     return;
                 }
@@ -66,6 +67,16 @@ function UserRegister() {
         } catch (error) {
             toast.error(error || "Something went wrong")
         }
+    }
+
+    const clearField = () => {
+        setFormData({
+            firstname: "",
+            lastname: "",
+            email: "",
+            password: "",
+            confirmpassword: ""
+        })
     }
 
     return (

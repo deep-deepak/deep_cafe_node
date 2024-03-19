@@ -3,6 +3,11 @@ const express = require('express');
 const router = express.Router();
 const User = require('../model/user')
 
+// Genearate verification code
+
+function generateVerificationCode() {
+    return Math.random().toString(36).substring(2, 8).toUpperCase(); // Example code generation
+}
 
 // Define routes related to products
 router.get('/api/users', async (req, res) => {
@@ -41,8 +46,8 @@ router.post('/api/user/register', async (req, res) => {
             })
         } else {
             const users = new User({
-                firstname: formData.firstname,
-                lastname: formData.lastname,
+                firstname: formData.firstName,
+                lastname: formData.lastName,
                 email: formData.email,
                 password: formData.password,
                 createdAt: new Date(),
@@ -82,5 +87,35 @@ router.post('/api/user/login', async (req, res) => {
     }
 });
 
+
+router.get('/api/users', async (req, res) => {
+    try {
+        const userData = await User.find();
+        if (userData) {
+            return {
+                status: true,
+                result: userData
+            }
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+
+router.delete('/api/user/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        if (userId) {
+            await User.deleteOne({ _id: userId });
+            return {
+                status: true,
+            }
+        }
+    } catch (error) {
+        console.log(error)
+    }
+});
 
 module.exports = router;

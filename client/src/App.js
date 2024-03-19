@@ -17,6 +17,7 @@ import UserRegister from './containers/UserRegistration';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Profile from './containers/Profile';
+import AdminPanel from './dashboard';
 
 function App() {
 
@@ -24,24 +25,39 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/todo" element={<Todo />} />
-          <Route path="/register" element={<UserRegister />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      {
+        window.location.pathname === "/dashboard" ? (
+          <BrowserRouter>
+            <ToastContainer />
+            <Routes>
+              <Route path="/dashboard" element={<AdminPanel />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        ) : (
+
+          <BrowserRouter>
+            <Header />
+            <ToastContainer />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/todo" element={<Todo />} />
+              <Route path="/register" element={<UserRegister />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/contactus" element={<ContactUs />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            <Footer />
+          </BrowserRouter>
+        )
+      }
+
     </div>
   );
 }

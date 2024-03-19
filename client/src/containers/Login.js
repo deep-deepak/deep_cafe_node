@@ -29,6 +29,7 @@ export default function Login() {
           if (token) {
             localStorage.setItem("token", token);
             navigate('/menu')
+            clearField()
             window.location.reload();
             return
           }
@@ -44,6 +45,11 @@ export default function Login() {
   const tokenGenerate = (payload) => {
     return btoa(JSON.stringify(payload)); // Simulated JWT encoding
   };
+
+  const clearField = () => {
+    setEmail("")
+    setPassword("")
+  }
 
   return (
     <section>
