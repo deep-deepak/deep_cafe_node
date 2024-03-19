@@ -28,6 +28,8 @@ export default function Login() {
           const token = tokenGenerate(result.data);
           if (token) {
             localStorage.setItem("token", token);
+            navigate('/menu')
+            window.location.reload();
             return
           }
         }
