@@ -8,11 +8,15 @@ app.use(cors());
 
 
 // Define API routes
-const todoRouter = require('./routes/todoRoute'); 
-app.use('/',todoRouter);
+const todoRouter = require('./routes/todoRoute');
+app.use('/', todoRouter);
 
-const userRouter = require('./routes/userRoute'); 
-app.use('/',userRouter);
+const userRouter = require('./routes/userRoute');
+app.use('/', userRouter);
+
+const dishRouter = require('./routes/dishRoute');
+app.use('/', dishRouter);
+
 
 // app listen port
 app.listen(5000, () => {

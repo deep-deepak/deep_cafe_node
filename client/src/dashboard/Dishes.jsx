@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllUsers, removeUser } from "../service/user";
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import {
   Table,
   TableHead,
@@ -11,23 +11,30 @@ import {
   Checkbox,
   Button,
   Chip,
+  Typography,
 } from "@mui/material";
-import AddUser from "../components/AddUser";
 import { toast } from "react-toastify";
+import { getAllDishes, removeProduct } from "../service/dish";
+import AddDish from "../components/AddDish";
 
 export default function Products() {
-  const [users, serUsers] = useState([]);
+  const [products, serProducts] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selected, setSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [dishId, setDishId] = useState(null)
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
-      const result = await getAllUsers();
-      serUsers(result);
-      setIsLoading(true);
+      const result = await getAllDishes();
+      console.log("result", result)
+      if (result.status) {
+        serProducts(result.result);
+        setIsLoading(true);
+      }
     })();
   }, [isLoading]);
 
@@ -44,7 +51,7 @@ export default function Products() {
 
   // Calculate pagination
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
+    rowsPerPage - Math.min(rowsPerPage, products.length - page * rowsPerPage);
 
   // Toggle selection of a row
   const handleSelect = (event, id) => {
@@ -67,11 +74,11 @@ export default function Products() {
     setSelected(newSelected);
   };
 
-  const handleRemoveUser = async (userId) => {
+  const handleRemoveDish = async (dishId) => {
     try {
       setIsLoading(!isLoading);
-      await removeUser(userId);
-      toast.success("User remove successfully");
+      await removeProduct(dishId);
+      toast.success("Dish Deleted successfully");
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -79,22 +86,26 @@ export default function Products() {
     }
   };
 
+  const handleDishUPdate = (dishId) => {
+    setDishId(dishId);
+    setOpen(true);
+  }
+
   return (
     <div>
       <Paper>
-        <AddUser isLoading={() => [isLoading, setIsLoading]} />
+        <AddDish isLoading={() => [isLoading, setIsLoading]} modalOpen={() => [open, setOpen]} dishId={dishId} />
+
         <Table>
           <TableHead>
             <TableRow>
               <TableCell padding="checkbox">
                 <Checkbox
-                  indeterminate={
-                    selected.length > 0 && selected.length < users.length
-                  }
-                  checked={selected.length === users.length}
+                  indeterminate={selected.length > 0 && selected.length < products.length}
+                  checked={selected.length === products.length}
                   onChange={(event) => {
                     if (event.target.checked) {
-                      setSelected(users.map((row) => row.id));
+                      setSelected(products.map((row) => row.id));
                     } else {
                       setSelected([]);
                     }
@@ -102,38 +113,32 @@ export default function Products() {
                 />
               </TableCell>
               <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell>Image</TableCell>
+              <TableCell>Category</TableCell>
+              <TableCell>Price</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? users.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              )
-              : users
+              ? products.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              : products
             ).map((row) => (
-              <TableRow
-                key={row._id}
-                hover
-                onClick={(event) => handleSelect(event, row._id)}
-              >
+              <TableRow key={row._id} hover onClick={(event) => handleSelect(event, row._id)}>
                 <TableCell padding="checkbox">
                   <Checkbox checked={selected.indexOf(row._id) !== -1} />
                 </TableCell>
                 <TableCell>{row._id}</TableCell>
+                <TableCell>{row.title}</TableCell>
                 <TableCell>
-                  {row.firstname} {row.lastname}{" "}
+                  <img src={`dishes/${row.image}`} height="50px" width="50px" />
                 </TableCell>
-                <TableCell>{row.email}</TableCell>
+                <TableCell>{row.category}</TableCell>
+                <TableCell>Rs.{row.price}</TableCell>
                 <TableCell>
-                  <Chip
-                    label="Remove User"
-                    color="error"
-                    onDelete={() => handleRemoveUser(row._id)}
-                  />
+                  <Chip label="Remove User" color="error" onDelete={() => handleRemoveDish(row._id)} />
+                  <Chip label="Update Dish" color="success" icon={<EditCalendarIcon />} onClick={() => handleDishUPdate(row._id)} />
                 </TableCell>
               </TableRow>
             ))}
@@ -147,12 +152,13 @@ export default function Products() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={users.length}
+          count={products.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+
       </Paper>
     </div>
   );

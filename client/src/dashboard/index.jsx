@@ -19,7 +19,7 @@ import {
 import Users from "./Users";
 import DashboardIndex from "./Dashboard";
 import AdminLogin from "./AdminLogin";
-import Products from "./Products";
+import Dishes from "./Dishes";
 import { useNavigate } from "react-router-dom";
 import Logout from "@mui/icons-material/Logout";
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
@@ -120,7 +120,7 @@ const AdminPanel = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
               >
-
+                
                 <MenuItem >
                   <ListItemIcon>
                     <EditNoteOutlinedIcon fontSize="small" />
@@ -144,6 +144,7 @@ const AdminPanel = () => {
               <Paper className="left_nav">
                 {/* Left side: Navigation */}
                 <List component="nav">
+                  <img src="images/deepcafe.png" width="200px" />
                   <ListItem onClick={() => handleNavItemClick("Dashboard")}>
                     <ListItemText
                       primary="Dashboard"
@@ -162,11 +163,11 @@ const AdminPanel = () => {
                       }
                     />
                   </ListItem>
-                  <ListItem onClick={() => handleNavItemClick("products")}>
+                  <ListItem onClick={() => handleNavItemClick("dish")}>
                     <ListItemText
-                      primary="Products"
+                      primary="Dishes"
                       className={
-                        selectedNavItem === "products"
+                        selectedNavItem === "dish"
                           ? "active_nav"
                           : "nav_item"
                       }
@@ -182,13 +183,13 @@ const AdminPanel = () => {
                 {/* Content based on selected navigation item */}
                 {selectedNavItem === "Dashboard" && <DashboardIndex />}
                 {selectedNavItem === "Users" && <Users />}
-                {selectedNavItem === "products" && <Products />}
+                {selectedNavItem === "dish" && <Dishes />}
                 {/* Add more content components for other navigation items */}
               </Paper>
             </Grid>
           </Grid>
         </div>
-      </div>
+      </div >
     );
   }
 

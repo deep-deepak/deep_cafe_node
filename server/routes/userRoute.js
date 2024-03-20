@@ -20,11 +20,8 @@ router.get('/api/user/:id', (req, res) => {
     try {
 
         const userId = req.params.id;
-        console.log("userId", userId)
-
         // Find the item by ID
         const userData = User.find((user) => user._id === userId);
-        console.log("userData", userData)
         if (userData) {
             res.json(userData); // Respond with the userData as JSON
         } else {
@@ -92,7 +89,7 @@ router.get('/api/users', async (req, res) => {
     try {
         const userData = await User.find();
         if (userData) {
-            return {
+            return  {
                 status: true,
                 result: userData
             }
