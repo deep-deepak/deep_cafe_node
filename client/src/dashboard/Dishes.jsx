@@ -91,10 +91,18 @@ export default function Products() {
     setOpen(true);
   }
 
+  const handleDialogClose = () => {
+    setDishId(null); // Reset dishId to null
+  };
+
   return (
     <div>
       <Paper>
-        <AddDish isLoading={() => [isLoading, setIsLoading]} modalOpen={() => [open, setOpen]} dishId={dishId} />
+        <AddDish
+          isLoading={() => [isLoading, setIsLoading]}
+          modalOpen={() => [open, setOpen]} dishId={dishId}
+          onDialogClose={handleDialogClose}
+        />
 
         <Table>
           <TableHead>

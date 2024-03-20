@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { createDish, uploadDishImage } from '../service/dish';
 import axios from 'axios';
 
-export default function AddDish({ isLoading, modalOpen, dishId }) {
+export default function AddDish({ isLoading, modalOpen, dishId, onDialogClose }) {
 
     const [loading, setLoading] = isLoading();
     const [open, setOpen] = modalOpen();
@@ -99,9 +99,8 @@ export default function AddDish({ isLoading, modalOpen, dishId }) {
 
     // Close dialog handler
     const handleClose = () => {
-        console.log("dishId", dishId)
-        dishId = null
         setOpen(false);
+        onDialogClose();
     };
 
 
